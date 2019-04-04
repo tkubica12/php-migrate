@@ -1,0 +1,25 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: php-todo-deploy
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: php-todo
+    spec:
+      containers:
+      - name: php-todo
+        image: mujphpregistr.azurecr.io/php/todo
+        env:
+        - name: MYSQL_HOST
+          value: "mujmysql.mysql.database.azure.com"
+        - name: MYSQL_USERNAME
+          value: "tomas@mujmysql"
+        - name: MYSQL_PASSWORD
+          value: "Azure12345678"
+        - name: MYSQL_DB
+          value: "todo"
+        ports:
+        - containerPort: 80
